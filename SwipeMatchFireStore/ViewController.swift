@@ -8,35 +8,36 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    let topStackView = TopNavigationStackView()
+    let cardsDeckView = UIView()
+    let bottomStackView = HomeBottomControlsStackView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let grayView = UIView()
-//        grayView.backgroundColor = .gray
-        
-        let subViews = [UIColor.gray, UIColor.darkGray, UIColor.black].map { (color) -> UIView in
-            let view = UIView()
-            view.backgroundColor = color
-            return view
-        }
-        
-        let topStackView = UIStackView(arrangedSubviews: subViews)
-        topStackView.distribution = .fillEqually
-        topStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        let blueView = UIView()
-        blueView.backgroundColor = .blue
-        
-        
-        let buttonStackView = HomeBottomControlsStackView()
-
-        
-        let overallStackView = UIStackView(arrangedSubviews: [topStackView, blueView, buttonStackView])
+        setupLayout()
+        setupDummyCards()
+    }
+    
+    private func setupDummyCards() {
+        let cardView = CardView()
+        cardsDeckView.addSubview(cardView)
+        cardView.fillSuperview()
+    }
+    
+    private func setupLayout() {
+        let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, bottomStackView])
         overallStackView.axis = .vertical
         view.addSubview(overallStackView)
-        overallStackView.fillSuperview()
         
+        overallStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                                leading: view.leadingAnchor,
+                                bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                                trailing: view.trailingAnchor)
+        
+        overallStackView.isLayoutMarginsRelativeArrangement = true
+        overallStackView.layoutMargins = .init(top: 0, left: 8, bottom: 0, right: 8)
     }
 
 
