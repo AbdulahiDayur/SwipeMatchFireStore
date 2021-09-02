@@ -16,9 +16,6 @@ class CardView: UIView {
         configure()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     private func configure() {
         
@@ -26,7 +23,7 @@ class CardView: UIView {
         clipsToBounds = true
         
         addSubview(imageView)
-        imageView.fillSuperview()
+//        imageView.fillSuperview()
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
@@ -35,19 +32,34 @@ class CardView: UIView {
     @objc private func handlePan(gesture: UIPanGestureRecognizer) {
 
         switch gesture.state {
-        
         case .changed:
-            let translation = gesture.translation(in: nil)
-            self.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
-
+            handleChanged(gesture)
         case .ended:
-            UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.6,
-                           initialSpringVelocity: 0.1, options: .curveEaseOut,
-                           animations: {self.transform = .identity})
+            handleEnded()
 
         default:
             ()
         }
     }
+    
+    private func handleChanged(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: nil)
+        let degree: CGFloat = translation.x / 20
+        let angle = degree * .pi / 180
+        
+        let rotationalTransformation = CGAffineTransform(rotationAngle: angle)
+        self.transform = rotationalTransformation.translatedBy(x: translation.x, y: translation.y)
+    }
+    
+    private func handleEnded() {
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 0.1, options: .curveEaseOut,
+                       animations: {self.transform = .identity})
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
 }
