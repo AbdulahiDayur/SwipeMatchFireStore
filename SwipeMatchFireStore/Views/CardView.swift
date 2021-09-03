@@ -11,6 +11,9 @@ class CardView: UIView {
     
     private let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
     
+    // Configuration
+    private let threshold: CGFloat = 80
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -35,7 +38,7 @@ class CardView: UIView {
         case .changed:
             handleChanged(gesture)
         case .ended:
-            handleEnded()
+            handleEnded(gesture)
 
         default:
             ()
@@ -51,10 +54,31 @@ class CardView: UIView {
         self.transform = rotationalTransformation.translatedBy(x: translation.x, y: translation.y)
     }
     
-    private func handleEnded() {
+    private func handleEnded(_ gesture: UIPanGestureRecognizer) {
+        
+        let shouldDismiss = gesture.translation(in: nil).x > threshold
+        let shouldDismissLeft = gesture.translation(in: nil).x < -threshold
+        
+    
         UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.6,
                        initialSpringVelocity: 0.1, options: .curveEaseOut,
-                       animations: {self.transform = .identity})
+                       animations: {
+                        if shouldDismiss {
+                            self.layer.frame = CGRect(x: 1000, y: 0, width: self.frame.width, height: self.frame.height)
+                            
+                        } else if shouldDismissLeft{
+                            self.layer.frame = CGRect(x: -1000, y: 0, width: self.frame.width, height: self.frame.height)
+                            
+                        } else {
+                            self.transform = .identity
+                        }
+                        
+                       }) {(_) in
+                            self.transform = .identity
+                            self.frame = CGRect(x: 0, y: 0,
+                            width: self.superview!.frame.width,
+                            height: self.superview!.frame.height)
+                       }
     }
     
     required init?(coder: NSCoder) {
