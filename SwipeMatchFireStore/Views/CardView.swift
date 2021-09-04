@@ -60,14 +60,14 @@ class CardView: UIView {
         let shouldDismissLeft = gesture.translation(in: nil).x < -threshold
         
     
-        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.6,
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6,
                        initialSpringVelocity: 0.1, options: .curveEaseOut,
                        animations: {
                         if shouldDismiss {
-                            self.layer.frame = CGRect(x: 1000, y: 0, width: self.frame.width, height: self.frame.height)
+                            self.layer.frame = CGRect(x: 600, y: 0, width: self.frame.width, height: self.frame.height)
                             
                         } else if shouldDismissLeft{
-                            self.layer.frame = CGRect(x: -1000, y: 0, width: self.frame.width, height: self.frame.height)
+                            self.layer.frame = CGRect(x: -600, y: 0, width: self.frame.width, height: self.frame.height)
                             
                         } else {
                             self.transform = .identity
