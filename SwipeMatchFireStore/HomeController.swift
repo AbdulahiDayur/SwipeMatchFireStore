@@ -13,6 +13,11 @@ class HomeController: UIViewController {
     let cardsDeckView = UIView()
     let bottomStackView = HomeBottomControlsStackView()
     
+    let users = [
+        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
+        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c")
+    ]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +27,14 @@ class HomeController: UIViewController {
     }
     
     private func setupDummyCards() {
-
-        let cardView = CardView()
-        cardsDeckView.addSubview(cardView)
-        cardView.fillSuperview()
+        
+        users.forEach { (user) in
+            let cardView = CardView()
+            cardView.imageView.image = UIImage(named: user.imageName)
+            cardView.name.text = user.name
+            cardsDeckView.addSubview(cardView)
+            cardView.fillSuperview()
+        }
     }
     
     private func setupLayout() {
