@@ -9,9 +9,9 @@ import UIKit
 
 class CardView: UIView {
     
-    private let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+    let imageView = UIImageView()
+    let informationLabel = UILabel()
     
-    // Configuration
     private let threshold: CGFloat = 80
     
     override init(frame: CGRect) {
@@ -25,8 +25,17 @@ class CardView: UIView {
         layer.cornerRadius = 10
         clipsToBounds = true
         
+        imageView.contentMode = .scaleAspectFill
         addSubview(imageView)
-//        imageView.fillSuperview()
+        imageView.fillSuperview()
+        
+        addSubview(informationLabel)
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor,
+                                padding: .init(top: 0, left: 16, bottom: 16, right: 16))
+        
+        informationLabel.textColor = .white
+        informationLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
+        informationLabel.numberOfLines = 0
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
@@ -56,14 +65,14 @@ class CardView: UIView {
     
     private func handleEnded(_ gesture: UIPanGestureRecognizer) {
         
-        let shouldDismiss = gesture.translation(in: nil).x > threshold
+        let shouldDismissRight = gesture.translation(in: nil).x > threshold
         let shouldDismissLeft = gesture.translation(in: nil).x < -threshold
         
     
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6,
                        initialSpringVelocity: 0.1, options: .curveEaseOut,
                        animations: {
-                        if shouldDismiss {
+                        if shouldDismissRight {
                             self.layer.frame = CGRect(x: 600, y: 0, width: self.frame.width, height: self.frame.height)
                             
                         } else if shouldDismissLeft{
@@ -74,10 +83,10 @@ class CardView: UIView {
                         }
                         
                        }) {(_) in
-                            self.transform = .identity
-                            self.frame = CGRect(x: 0, y: 0,
-                            width: self.superview!.frame.width,
-                            height: self.superview!.frame.height)
+//                            self.transform = .identity
+//                            self.frame = CGRect(x: 0, y: 0,
+//                            width: self.superview!.frame.width,
+//                            height: self.superview!.frame.height)
                        }
     }
     
