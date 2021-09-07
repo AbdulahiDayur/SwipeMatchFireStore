@@ -66,10 +66,10 @@
 		0F14029226D1CF2400D0EBE8 /* SwipeMatchFireStore */ = {
 			isa = PBXGroup;
 			children = (
-				0FBD548E26E7EC8E0073A64B /* Controllers */,
 				0F1402A826D1E8B400D0EBE8 /* Extensions */,
 				0F1402BE26E4320300D0EBE8 /* Model */,
 				0F1402AC26D45E0200D0EBE8 /* Views */,
+				0FBD548E26E7EC8E0073A64B /* Controllers */,
 				0F14029526D1CF2400D0EBE8 /* SceneDelegate.swift */,
 				0F14029326D1CF2400D0EBE8 /* AppDelegate.swift */,
 				0F14029926D1CF2400D0EBE8 /* Main.storyboard */,
