@@ -9,11 +9,20 @@ import UIKit
 
 class CardView: UIView {
     
+    //Property observer
     var cardViewModel: CardViewModel! {
         didSet {
-            imageView.image = UIImage(named: cardViewModel.imageName)
+            let imageName = cardViewModel.imageNames.first ?? ""
+            imageView.image = UIImage(named: imageName)
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
+            
+            (0..<cardViewModel.imageNames.count).forEach { (_) in
+                let barView = UIView()
+                barView.backgroundColor = UIColor(white: 0, alpha: 0.1)
+                barStackView.addArrangedSubview(barView)
+            }
+            barStackView.arrangedSubviews.first?.backgroundColor = .white
         }
     }
     
@@ -29,6 +38,19 @@ class CardView: UIView {
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+    }
+    
+    var imageIndex = 0
+    @objc func handleTap(gesture: UITapGestureRecognizer) {
+        let tapLocation = gesture.location(in: nil)
+        let shouldAdvanceNextPhoto = tapLocation.x > frame.width ? true: false
+        
+        if shouldAdvanceNextPhoto {
+            imageIndex += 1
+        } else {
+            imageIndex -= 1
+        }
     }
     
     
@@ -40,6 +62,8 @@ class CardView: UIView {
         imageView.contentMode = .scaleAspectFill
         addSubview(imageView)
         imageView.fillSuperview()
+        
+        setupBarStackView()
     
         // add a gradient layer
         setupGradientLayer()
@@ -50,6 +74,18 @@ class CardView: UIView {
         
         informationLabel.textColor = .white
         informationLabel.numberOfLines = 0
+    }
+    
+    let barStackView = UIStackView()
+    
+    func setupBarStackView() {
+        addSubview(barStackView)
+        barStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor,
+                            padding: .init(top: 8, left: 8, bottom: 0, right: 8),
+                            size: .init(width: 0, height: 4))
+        
+        barStackView.spacing = 4
+        barStackView.distribution = .fillEqually
     }
     
     func setupGradientLayer() {
@@ -65,8 +101,12 @@ class CardView: UIView {
     }
     
     @objc private func handlePan(gesture: UIPanGestureRecognizer) {
-
+        
         switch gesture.state {
+        case .began:
+            superview?.subviews.forEach({ (subview) in
+                subview.layer.removeAllAnimations()
+            })
         case .changed:
             handleChanged(gesture)
         case .ended:
