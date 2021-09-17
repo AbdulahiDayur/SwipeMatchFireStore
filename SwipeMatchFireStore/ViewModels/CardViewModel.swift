@@ -28,15 +28,24 @@ class CardViewModel {
         self.textAlignment = textAlignment
     }
     
-    var imageIndex = 0
+    // track whenever set to new value
+    var imageIndex = 0 {
+        didSet {
+            let imageName = imageNames[imageIndex]
+            let image = UIImage(named: imageName)
+            imageIndexObserver?(imageIndex, image)
+        }
+    }
+    
+    var imageIndexObserver: ((Int, UIImage?) -> ())?
     
     func advanceToNextPhoto() {
-        imageIndex = imageNames.count - 1
+        imageIndex = min(imageIndex + 1, imageNames.count - 1)
         
     }
     
     func goToPreviousPhoto() {
-        imageIndex -= 1
+        imageIndex = max(0, imageIndex - 1)
     }
 }
 
