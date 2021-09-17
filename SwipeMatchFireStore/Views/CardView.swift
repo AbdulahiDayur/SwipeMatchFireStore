@@ -23,6 +23,20 @@ class CardView: UIView {
                 barStackView.addArrangedSubview(barView)
             }
             barStackView.arrangedSubviews.first?.backgroundColor = .white
+            
+            setupImageIndexObserver()
+        }
+    }
+    
+    func setupImageIndexObserver() {
+        cardViewModel.imageIndexObserver = { (idx, image) in
+            print("Changing photo from view model")
+            self.imageView.image = image
+            
+            self.barStackView.subviews.forEach { (view) in
+                view.backgroundColor = self.barDeselectedColor
+            }
+            self.barStackView.arrangedSubviews[idx].backgroundColor = .white
         }
     }
     
