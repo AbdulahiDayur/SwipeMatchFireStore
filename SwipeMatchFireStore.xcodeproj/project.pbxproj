@@ -19,6 +19,7 @@
 		0F1402B926D5AC8D00D0EBE8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1402B826D5AC8D00D0EBE8 /* CardView.swift */; };
 		0F1402C026E4321700D0EBE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1402BF26E4321700D0EBE8 /* User.swift */; };
 		0F701D8626F02084003DAB7F /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F701D8526F02084003DAB7F /* Advertiser.swift */; };
+		0FA7DC5626F68D750091D30E /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7DC5526F68D750091D30E /* RegistrationController.swift */; };
 		0FBD549126E7EE570073A64B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBD549026E7EE570073A64B /* HomeController.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		0F1402B826D5AC8D00D0EBE8 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		0F1402BF26E4321700D0EBE8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0F701D8526F02084003DAB7F /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		0FA7DC5526F68D750091D30E /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		0FBD549026E7EE570073A64B /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				0FBD549026E7EE570073A64B /* HomeController.swift */,
+				0FA7DC5526F68D750091D30E /* RegistrationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				0F1402AE26D45E4800D0EBE8 /* HomeBottomControlsStackView.swift in Sources */,
 				0F1402C026E4321700D0EBE8 /* User.swift in Sources */,
 				0FBD549126E7EE570073A64B /* HomeController.swift in Sources */,
+				0FA7DC5626F68D750091D30E /* RegistrationController.swift in Sources */,
 				0F1402B526D4AAF400D0EBE8 /* TopNavigationStackView.swift in Sources */,
 				0F1402AA26D1E8CC00D0EBE8 /* Extensions+UIView.swift in Sources */,
 				0F14029626D1CF2400D0EBE8 /* SceneDelegate.swift in Sources */,
