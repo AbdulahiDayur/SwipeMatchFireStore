@@ -29,8 +29,9 @@ class CardView: UIView {
     }
     
     func setupImageIndexObserver() {
-        cardViewModel.imageIndexObserver = { (idx, image) in
-            print("Changing photo from view model")
+        cardViewModel.imageIndexObserver = { [weak self] (idx, image) in
+            guard let self = self else {return}
+            
             self.imageView.image = image
             
             self.barStackView.subviews.forEach { (view) in
