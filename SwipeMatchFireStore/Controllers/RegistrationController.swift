@@ -33,6 +33,7 @@ class RegistrationController: UIViewController {
     let emailTextField: CustomTextField = {
         let tf = CustomTextField(padding: 16)
         tf.placeholder = "Enter email"
+        tf.keyboardType = .emailAddress
         tf.backgroundColor = .white
         
         return tf
@@ -65,6 +66,26 @@ class RegistrationController: UIViewController {
 
         setupGradientLayer()
         setupLayout()
+        setupNotificationObservers()
+    }
+    
+    private func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    @objc func handleKeyboardShow(notification: Notification) {
+        
+        // Figure out how tall keyboard actually is
+        guard let value = notification.userInfo? [UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        let keyboardFrame = value.cgRectValue
+        
+        // Gap between register button and bottom of screen
+        let bottomSpace = view.frame.height - stackView.frame.origin.y - stackView.frame.height
+        let difference = keyboardFrame.height - bottomSpace
+        
+        self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 12)
+        
     }
     
     private func setupGradientLayer() {
@@ -78,9 +99,12 @@ class RegistrationController: UIViewController {
         gradientLayer.frame = view.bounds
     }
     
+    lazy var stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField ,passwordTextField, registerButton])
+
+    
     private func setupLayout() {
         
-        let stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField ,passwordTextField, registerButton])
+//        let stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField ,passwordTextField, registerButton])
         view.addSubview(stackView)
         stackView.axis = .vertical
         stackView.spacing = 8
