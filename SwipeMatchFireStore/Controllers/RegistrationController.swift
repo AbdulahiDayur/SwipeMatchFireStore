@@ -26,6 +26,7 @@ class RegistrationController: UIViewController {
         let tf = CustomTextField(padding: 16)
         tf.placeholder = "Enter full name"
         tf.backgroundColor = .white
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         
         return tf
     }()
@@ -35,6 +36,7 @@ class RegistrationController: UIViewController {
         tf.placeholder = "Enter email"
         tf.keyboardType = .emailAddress
         tf.backgroundColor = .white
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         
         return tf
     }()
@@ -44,16 +46,36 @@ class RegistrationController: UIViewController {
         tf.placeholder = "Enter Password"
         tf.isSecureTextEntry = true
         tf.backgroundColor = .white
+        tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         
         return tf
     }()
+    
+    @objc func handleTextChange(textField: UITextField) {
+        if textField == fullNameTextField {
+            print("FULLNAME CHANGING:")
+        } else if textField == emailTextField {
+            print("email CHANGING:")
+        } else {
+            print("Password CHANGING:")
+        }
+        
+        
+        
+        registerButton.isEnabled = true
+        registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+        
+    }
     
     let registerButton : UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-        button.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+//        button.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
         button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .lightGray
+        button.setTitleColor(.gray, for: .disabled)
+        button.isEnabled = false
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.layer.cornerRadius = 22
         
