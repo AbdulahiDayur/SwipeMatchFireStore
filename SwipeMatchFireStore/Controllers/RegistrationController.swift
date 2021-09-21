@@ -67,6 +67,19 @@ class RegistrationController: UIViewController {
         setupGradientLayer()
         setupLayout()
         setupNotificationObservers()
+        setupTapGesture()
+    }
+    
+    private func setupTapGesture() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
+    }
+    
+    @objc func handleTapDismiss(){
+        self.view.endEditing(true) // Keyboard dismiss
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {
+            self.view.transform = .identity
+        }
+        
     }
     
     private func setupNotificationObservers() {
