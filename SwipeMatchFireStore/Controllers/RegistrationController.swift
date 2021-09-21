@@ -76,15 +76,26 @@ class RegistrationController: UIViewController {
     
     @objc func handleTapDismiss(){
         self.view.endEditing(true) // Keyboard dismiss
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {
-            self.view.transform = .identity
-        }
-        
     }
     
     private func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // Detach yourself from Notification Center. You'll have a retain cycle. <--- BAD
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func handleKeyboardHide() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {
+            self.view.transform = .identity
+        }
+        
     }
     
     @objc func handleKeyboardShow(notification: Notification) {
