@@ -22,6 +22,7 @@
 		0FA7DC5626F68D750091D30E /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7DC5526F68D750091D30E /* RegistrationController.swift */; };
 		0FA7DC5926F8F7FC0091D30E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7DC5826F8F7FC0091D30E /* CustomTextField.swift */; };
 		0FBD549126E7EE570073A64B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBD549026E7EE570073A64B /* HomeController.swift */; };
+		0FDF446F26FAA1FE00F3E5E2 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDF446E26FAA1FE00F3E5E2 /* RegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		0FA7DC5526F68D750091D30E /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		0FA7DC5826F8F7FC0091D30E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		0FBD549026E7EE570073A64B /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		0FDF446E26FAA1FE00F3E5E2 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 			children = (
 				0FBD549026E7EE570073A64B /* HomeController.swift */,
 				0FA7DC5526F68D750091D30E /* RegistrationController.swift */,
+				0FDF446E26FAA1FE00F3E5E2 /* RegistrationViewModel.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				0FA7DC5626F68D750091D30E /* RegistrationController.swift in Sources */,
 				0F1402B526D4AAF400D0EBE8 /* TopNavigationStackView.swift in Sources */,
 				0FA7DC5926F8F7FC0091D30E /* CustomTextField.swift in Sources */,
+				0FDF446F26FAA1FE00F3E5E2 /* RegistrationViewModel.swift in Sources */,
 				0F1402AA26D1E8CC00D0EBE8 /* Extensions+UIView.swift in Sources */,
 				0F14029626D1CF2400D0EBE8 /* SceneDelegate.swift in Sources */,
 				0F04235B26E7FE1A0099561A /* CardViewModel.swift in Sources */,
