@@ -52,16 +52,13 @@ class RegistrationController: UIViewController {
     }()
     
     @objc func handleTextChange(textField: UITextField) {
-        let isFormVaild = fullNameTextField.text?.isEmpty == false && emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
         
-        registerButton.isEnabled = isFormVaild
-        
-        if isFormVaild {
-            registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
-            registerButton.setTitleColor(.white, for: .normal)
+        if textField == fullNameTextField {
+            registrationViewModel.fullName = textField.text
+        } else if textField == emailTextField {
+            registrationViewModel.email = textField.text
         } else {
-            registerButton.backgroundColor = .lightGray
-            registerButton.setTitleColor(.gray, for: .disabled)
+            registrationViewModel.password = textField.text
         }
     }
     
@@ -86,6 +83,21 @@ class RegistrationController: UIViewController {
         setupLayout()
         setupNotificationObservers()
         setupTapGesture()
+        setupRegistrationViewModelObserver()
+    }
+    let registrationViewModel = RegistrationViewModel()
+    
+    
+    private func setupRegistrationViewModelObserver() {
+        registrationViewModel.isFormValidObserver = { [weak self] (isFormValid) in
+            guard let self = self else {return}
+            
+            self.registerButton.isEnabled = isFormValid
+            if isFormValid == true {
+                self.registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+                self.registerButton.setTitleColor(.white, for: .normal)
+            }
+        }
     }
     
     private func setupTapGesture() {
