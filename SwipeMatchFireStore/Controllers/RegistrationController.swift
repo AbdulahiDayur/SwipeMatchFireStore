@@ -52,29 +52,25 @@ class RegistrationController: UIViewController {
     }()
     
     @objc func handleTextChange(textField: UITextField) {
-        if textField == fullNameTextField {
-            print("FULLNAME CHANGING:")
-        } else if textField == emailTextField {
-            print("email CHANGING:")
+        let isFormVaild = fullNameTextField.text?.isEmpty == false && emailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
+        
+        registerButton.isEnabled = isFormVaild
+        
+        if isFormVaild {
+            registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+            registerButton.setTitleColor(.white, for: .normal)
         } else {
-            print("Password CHANGING:")
+            registerButton.backgroundColor = .lightGray
+            registerButton.setTitleColor(.gray, for: .disabled)
         }
-        
-        
-        
-        registerButton.isEnabled = true
-        registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
-        
     }
     
     let registerButton : UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-//        button.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
-        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .lightGray
         button.setTitleColor(.gray, for: .disabled)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         button.isEnabled = false
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.layer.cornerRadius = 22
