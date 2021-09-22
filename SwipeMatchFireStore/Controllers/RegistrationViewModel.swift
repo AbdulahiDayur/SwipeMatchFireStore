@@ -9,15 +9,16 @@ import UIKit
 
 class RegistrationViewModel {
     
-    var fullName: String? {
-        didSet {
-            
-        }
-    }
-    var email: String? { didSet {} }
-    var password: String? { didSet {} }
+    var fullName: String? { didSet {checkForValidity()} }
+    var email: String? { didSet {checkForValidity()} }
+    var password: String? { didSet {checkForValidity()} }
     
+    private func checkForValidity() {
+        let isFormVaild = fullName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
+        
+        isFormValidObserver?(isFormVaild)
+    }
     
     // Reactive Programming
-    let isFormValidObserver: ((Bool) -> ()?)
+    var isFormValidObserver: ((Bool) -> ())?
 }
