@@ -37,6 +37,7 @@ class CardViewModel {
         }
     }
     
+    // Reactive Programming
     var imageIndexObserver: ((Int, UIImage?) -> ())?
     
     func advanceToNextPhoto() {
