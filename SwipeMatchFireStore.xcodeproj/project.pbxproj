@@ -23,6 +23,7 @@
 		0FA7DC5926F8F7FC0091D30E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7DC5826F8F7FC0091D30E /* CustomTextField.swift */; };
 		0FBD549126E7EE570073A64B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBD549026E7EE570073A64B /* HomeController.swift */; };
 		0FDF446F26FAA1FE00F3E5E2 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDF446E26FAA1FE00F3E5E2 /* RegistrationViewModel.swift */; };
+		DCBAE5E567B7C52F43DAD8FC /* Pods_SwipeMatchFireStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA10F360440E9FA0C9F93CFD /* Pods_SwipeMatchFireStore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,9 @@
 		0FA7DC5826F8F7FC0091D30E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		0FBD549026E7EE570073A64B /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		0FDF446E26FAA1FE00F3E5E2 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		61D6477FEF664ACE21C13028 /* Pods-SwipeMatchFireStore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchFireStore.debug.xcconfig"; path = "Target Support Files/Pods-SwipeMatchFireStore/Pods-SwipeMatchFireStore.debug.xcconfig"; sourceTree = "<group>"; };
+		DA10F360440E9FA0C9F93CFD /* Pods_SwipeMatchFireStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeMatchFireStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF0936D3AFCD82DE50B3D57E /* Pods-SwipeMatchFireStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchFireStore.release.xcconfig"; path = "Target Support Files/Pods-SwipeMatchFireStore/Pods-SwipeMatchFireStore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCBAE5E567B7C52F43DAD8FC /* Pods_SwipeMatchFireStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +75,8 @@
 			children = (
 				0F14029226D1CF2400D0EBE8 /* SwipeMatchFireStore */,
 				0F14029126D1CF2400D0EBE8 /* Products */,
+				33B911037145E5B0CD3FA643 /* Pods */,
+				FFF3E9A964B483D4DF81DCA1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +144,24 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		33B911037145E5B0CD3FA643 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				61D6477FEF664ACE21C13028 /* Pods-SwipeMatchFireStore.debug.xcconfig */,
+				DF0936D3AFCD82DE50B3D57E /* Pods-SwipeMatchFireStore.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FFF3E9A964B483D4DF81DCA1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA10F360440E9FA0C9F93CFD /* Pods_SwipeMatchFireStore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,9 +169,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F1402A426D1CF2700D0EBE8 /* Build configuration list for PBXNativeTarget "SwipeMatchFireStore" */;
 			buildPhases = (
+				F278D63411178E3A36B468D3 /* [CP] Check Pods Manifest.lock */,
 				0F14028C26D1CF2400D0EBE8 /* Sources */,
 				0F14028D26D1CF2400D0EBE8 /* Frameworks */,
 				0F14028E26D1CF2400D0EBE8 /* Resources */,
+				57D0224F4F99C146780AF968 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,6 +228,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		57D0224F4F99C146780AF968 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwipeMatchFireStore/Pods-SwipeMatchFireStore-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwipeMatchFireStore/Pods-SwipeMatchFireStore-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwipeMatchFireStore/Pods-SwipeMatchFireStore-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F278D63411178E3A36B468D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwipeMatchFireStore-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0F14028C26D1CF2400D0EBE8 /* Sources */ = {
@@ -363,6 +432,7 @@
 		};
 		0F1402A526D1CF2700D0EBE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61D6477FEF664ACE21C13028 /* Pods-SwipeMatchFireStore.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -381,6 +451,7 @@
 		};
 		0F1402A626D1CF2700D0EBE8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF0936D3AFCD82DE50B3D57E /* Pods-SwipeMatchFireStore.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
