@@ -34,8 +34,8 @@ class RegistrationController: UIViewController {
     let emailTextField: CustomTextField = {
         let tf = CustomTextField(padding: 16)
         tf.placeholder = "Enter email"
-        tf.keyboardType = .emailAddress
         tf.backgroundColor = .white
+        tf.keyboardType = .emailAddress
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         
         return tf
@@ -44,8 +44,8 @@ class RegistrationController: UIViewController {
     let passwordTextField: CustomTextField = {
         let tf = CustomTextField(padding: 16)
         tf.placeholder = "Enter Password"
-        tf.isSecureTextEntry = true
         tf.backgroundColor = .white
+        tf.isSecureTextEntry = true
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         
         return tf
@@ -85,8 +85,8 @@ class RegistrationController: UIViewController {
         setupTapGesture()
         setupRegistrationViewModelObserver()
     }
-    let registrationViewModel = RegistrationViewModel()
     
+    let registrationViewModel = RegistrationViewModel()
     
     private func setupRegistrationViewModelObserver() {
         registrationViewModel.isFormValidObserver = { [weak self] (isFormValid) in
