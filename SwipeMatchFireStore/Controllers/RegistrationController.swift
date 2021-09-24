@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class RegistrationController: UIViewController {
     
@@ -71,9 +72,27 @@ class RegistrationController: UIViewController {
         button.isEnabled = false
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.layer.cornerRadius = 22
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         
         return button
     }()
+    
+    @objc func handleRegister() {
+        print("Register our User in FireBase Auth")
+        
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
+            
+            if let err = err {
+                print("ERROR ALERTTTTTTT: ", err)
+                return
+            }
+            
+            print("Successfully registered user:", result?.user.uid ?? "")
+        }
+    }
     
 
     override func viewDidLoad() {
