@@ -85,6 +85,8 @@ class RegistrationController: UIViewController {
         return button
     }()
     
+    let registerHud = JGProgressHUD(style: .dark)
+    
     @objc func handleRegister() {
         print("Register our User in FireBase Auth")
         self.handleTapDismiss()
@@ -92,20 +94,22 @@ class RegistrationController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
+        registerHud.textLabel.text = "Register"
+        registerHud.show(in: view)
+        
         Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
             
             if let err = err {
-                print("ERROR ALERTTTTTTT: ", err)
                 self.showHudWithError(error: err)
                 return
             }
             
             print("Successfully registered user:", result?.user.uid ?? "")
-            print("WHAT IS RESULT YOU ASK?", result ?? "")
         }
     }
     
     private func showHudWithError(error: Error) {
+        registerHud.dismiss()
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Failed registration"
         hud.detailTextLabel.text = error.localizedDescription
