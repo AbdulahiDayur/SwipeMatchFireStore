@@ -20,9 +20,16 @@ class RegistrationController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         
         return button
     }()
+    
+    @objc func handleSelectPhoto() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+    }
     
     let fullNameTextField: CustomTextField = {
         let tf = CustomTextField(padding: 16)
@@ -129,6 +136,12 @@ class RegistrationController: UIViewController {
                 self.registerButton.setTitleColor(.white, for: .normal)
             }
         }
+        
+        registrationViewModel.imageObserver = { [weak self] (image) in
+            guard let self = self else {return}
+            
+            self.selectPhotoButton.setImage(image, for: .normal)
+        }
     }
     
     private func setupTapGesture() {
@@ -201,4 +214,18 @@ class RegistrationController: UIViewController {
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 
+}
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let selectedImage = info[.originalImage] as? UIImage
+        registrationViewModel.image = selectedImage
+        
+        dismiss(animated: true, completion: nil)
+    }
 }
