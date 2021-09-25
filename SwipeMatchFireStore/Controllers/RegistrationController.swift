@@ -94,10 +94,14 @@ class RegistrationController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-        registerHud.textLabel.text = "Register"
-        registerHud.show(in: view)
+        registrationViewModel.isRegistering = true
         
-        Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
+//        registerHud.textLabel.text = "Register"
+//        registerHud.show(in: view)
+        
+        // registering a brand new user
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, err) in
+            guard let self = self else {return}
             
             if let err = err {
                 self.showHudWithError(error: err)
@@ -105,6 +109,29 @@ class RegistrationController: UIViewController {
             }
             
             print("Successfully registered user:", result?.user.uid ?? "")
+            
+            // upload images to firebase storage
+            let fileName = UUID().uuidString
+            let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
+            let imageData = self.registrationViewModel.image?.jpegData(compressionQuality: 0.75) ?? Data()
+            
+            ref.putData(imageData, metadata: nil) { (_, err) in
+                
+                if let err = err {
+                    self.showHudWithError(error: err)
+                    return
+                }
+                print("FINISHED UPLOADING IMAGE TO STORAGE")
+                ref.downloadURL { (url, err) in
+                    if let err = err {
+                        self.showHudWithError(error: err)
+                        return
+                    }
+                    
+                    self.registrationViewModel.isRegistering = false
+                    print("DOWNLOAD URL OF OUR IMAGE IS: ", url?.absoluteString ?? "")
+                }
+            }
         }
     }
     
@@ -145,6 +172,17 @@ class RegistrationController: UIViewController {
             guard let self = self else {return}
             
             self.selectPhotoButton.setImage(image, for: .normal)
+        }
+        
+        registrationViewModel.isRegisteringObserver = { [weak self] (isRegistering) in
+            guard let self = self else {return}
+            
+            if isRegistering == true {
+                self.registerHud.textLabel.text = "Register"
+                self.registerHud.show(in: self.view)
+            } else {
+                self.registerHud.dismiss()
+            }
         }
     }
     
