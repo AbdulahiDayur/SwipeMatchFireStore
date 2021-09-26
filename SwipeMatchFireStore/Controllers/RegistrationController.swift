@@ -94,10 +94,7 @@ class RegistrationController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-        registrationViewModel.isRegistering = true
-        
-//        registerHud.textLabel.text = "Register"
-//        registerHud.show(in: view)
+        registrationViewModel.bindableIsRegistering.value = true
         
         // registering a brand new user
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, err) in
@@ -113,7 +110,7 @@ class RegistrationController: UIViewController {
             // upload images to firebase storage
             let fileName = UUID().uuidString
             let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
-            let imageData = self.registrationViewModel.image?.jpegData(compressionQuality: 0.75) ?? Data()
+            let imageData = self.registrationViewModel.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
             
             ref.putData(imageData, metadata: nil) { (_, err) in
                 
@@ -128,7 +125,7 @@ class RegistrationController: UIViewController {
                         return
                     }
                     
-                    self.registrationViewModel.isRegistering = false
+                    self.registrationViewModel.bindableIsRegistering.value = false
                     print("DOWNLOAD URL OF OUR IMAGE IS: ", url?.absoluteString ?? "")
                 }
             }
@@ -158,9 +155,11 @@ class RegistrationController: UIViewController {
     let registrationViewModel = RegistrationViewModel()
     
     private func setupRegistrationViewModelObserver() {
-        registrationViewModel.isFormValidObserver = { [weak self] (isFormValid) in
+        
+        registrationViewModel.bindableIsFormValid.bind { [weak self] (isFormValid) in
             guard let self = self else {return}
-            
+            guard let isFormValid = isFormValid else {return}
+
             self.registerButton.isEnabled = isFormValid
             if isFormValid == true {
                 self.registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
@@ -168,15 +167,18 @@ class RegistrationController: UIViewController {
             }
         }
         
-        registrationViewModel.imageObserver = { [weak self] (image) in
+        registrationViewModel.bindableImage.bind { [weak self] (image) in
             guard let self = self else {return}
-            
             self.selectPhotoButton.setImage(image, for: .normal)
         }
+//        registrationViewModel.imageObserver = { [weak self] (image) in
+//            guard let self = self else {return}
+//            self.selectPhotoButton.setImage(image, for: .normal)
+//        }
         
-        registrationViewModel.isRegisteringObserver = { [weak self] (isRegistering) in
+        registrationViewModel.bindableIsRegistering.bind { [weak self] (isRegistering) in
             guard let self = self else {return}
-            
+
             if isRegistering == true {
                 self.registerHud.textLabel.text = "Register"
                 self.registerHud.show(in: self.view)
@@ -266,7 +268,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let selectedImage = info[.originalImage] as? UIImage
-        registrationViewModel.image = selectedImage
+        registrationViewModel.bindableImage.value = selectedImage
         
         dismiss(animated: true, completion: nil)
     }
