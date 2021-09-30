@@ -91,43 +91,10 @@ class RegistrationController: UIViewController {
         print("Register our User in FireBase Auth")
         self.handleTapDismiss()
         
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        
-        registrationViewModel.bindableIsRegistering.value = true
-        
         // registering a brand new user
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, err) in
-            guard let self = self else {return}
-            
+        registrationViewModel.performingRegistration { (err) in
             if let err = err {
                 self.showHudWithError(error: err)
-                return
-            }
-            
-            print("Successfully registered user:", result?.user.uid ?? "")
-            
-            // upload images to firebase storage
-            let fileName = UUID().uuidString
-            let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
-            let imageData = self.registrationViewModel.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
-            
-            ref.putData(imageData, metadata: nil) { (_, err) in
-                
-                if let err = err {
-                    self.showHudWithError(error: err)
-                    return
-                }
-                print("FINISHED UPLOADING IMAGE TO STORAGE")
-                ref.downloadURL { (url, err) in
-                    if let err = err {
-                        self.showHudWithError(error: err)
-                        return
-                    }
-                    
-                    self.registrationViewModel.bindableIsRegistering.value = false
-                    print("DOWNLOAD URL OF OUR IMAGE IS: ", url?.absoluteString ?? "")
-                }
             }
         }
     }
