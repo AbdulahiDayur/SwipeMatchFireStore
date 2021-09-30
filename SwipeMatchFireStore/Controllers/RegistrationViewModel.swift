@@ -33,7 +33,7 @@ class RegistrationViewModel {
                 return
             }
             
-            print("Successfully registered user:", result?.user.uid ?? "")
+            print("SUCCESSFULLY REGISTERED USER:", result?.user.uid ?? "")
             self.saveImageToFireBase(completion: completion)
         }
     }
@@ -59,13 +59,24 @@ class RegistrationViewModel {
                 
                 self.bindableIsRegistering.value = false
                 print("DOWNLOAD URL OF OUR IMAGE IS: ", url?.absoluteString ?? "")
-                completion(nil)
+                
+                self.saveInfoToFirestore(completion: completion)
             }
         }
     }
     
-    private func saveInfoToFirestore(completion: (Error?) -> ()) {
-        Firestore.firestore().collection("users").document(<#T##documentPath: String##String#>).setData(<#T##documentData: [String : Any]##[String : Any]#>, completion: <#T##((Error?) -> Void)?##((Error?) -> Void)?##(Error?) -> Void#>)
+    private func saveInfoToFirestore(completion: @escaping (Error?) -> ()) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        let docData = ["fullName": fullName ?? "", "uid": uid]
+        
+        Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+            if let err = err {
+                completion(err)
+                return
+            }
+            
+            completion(nil)
+        }
     }
     
     
