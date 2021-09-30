@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class RegistrationViewModel {
     
@@ -18,12 +19,56 @@ class RegistrationViewModel {
     var password: String? { didSet {checkForValidity()} }
 //    var image: UIImage? { didSet {imageObserver?(image)} }
     
+    // registering a brand new user
+    // ----------------------- call completion if encounter error
     func performingRegistration(completion: @escaping (Error?) -> ()) {
         guard let email = email, let password = password else {return}
+        self.bindableIsRegistering.value = true
         
+        // registering a brand new user
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, err) in
+            guard let self = self else {return}
+            if let err = err {
+                completion(err)
+                return
+            }
+            
+            print("Successfully registered user:", result?.user.uid ?? "")
+            self.saveImageToFireBase(completion: completion)
+        }
     }
     
-
+    func saveImageToFireBase(completion: @escaping (Error?) -> ()) {
+        // upload images to firebase storage
+        let fileName = UUID().uuidString
+        let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
+        let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
+        
+        ref.putData(imageData, metadata: nil) { (_, err) in
+            
+            if let err = err {
+                completion(err)
+                return
+            }
+            print("FINISHED UPLOADING IMAGE TO STORAGE")
+            ref.downloadURL { (url, err) in
+                if let err = err {
+                    completion(err)
+                    return
+                }
+                
+                self.bindableIsRegistering.value = false
+                print("DOWNLOAD URL OF OUR IMAGE IS: ", url?.absoluteString ?? "")
+                completion(nil)
+            }
+        }
+    }
+    
+    private func saveInfoToFirestore(completion: (Error?) -> ()) {
+        Firestore.firestore().collection("users").document(<#T##documentPath: String##String#>).setData(<#T##documentData: [String : Any]##[String : Any]#>, completion: <#T##((Error?) -> Void)?##((Error?) -> Void)?##(Error?) -> Void#>)
+    }
+    
+    
 //    Reactive Programming
 //    var imageObserver: ((UIImage?) -> ())?
     
