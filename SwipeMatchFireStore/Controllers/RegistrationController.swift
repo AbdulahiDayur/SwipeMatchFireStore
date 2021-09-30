@@ -88,14 +88,16 @@ class RegistrationController: UIViewController {
     let registerHud = JGProgressHUD(style: .dark)
     
     @objc func handleRegister() {
-        print("Register our User in FireBase Auth")
+        print("REGISTER OUR USER IN FIREBASE AUTH")
         self.handleTapDismiss()
         
         // registering a brand new user
         registrationViewModel.performingRegistration { (err) in
             if let err = err {
                 self.showHudWithError(error: err)
+                return
             }
+            print("FINISHED RGISTERING OUR USER")
         }
     }
     
