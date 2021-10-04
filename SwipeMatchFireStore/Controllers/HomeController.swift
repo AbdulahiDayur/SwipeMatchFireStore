@@ -15,16 +15,18 @@ class HomeController: UIViewController {
     let buttonsStackView = HomeBottomControlsStackView()
     
     
-    let cardViewModel: [CardViewModel] = {
-        let producers = [
-            User(name: "Kelly", age: 23, profession: "Music DJ", imageName: ["kelly1", "kelly2", "kelly3"]),
-            User(name: "Jane", age: 18, profession: "Teacher", imageName: ["jane1", "jane2", "jane3"]),
-            Advertiser(title: "Slide Out Menu", brandName: "Lets Build That APP", posterPhotoName: "slide_out_menu_poster")
-        ] as [ProducesCardViewModel]
-        
-        let viewModels = producers.map {return $0.toCardViewModel()}
-        return viewModels
-    }()
+//    let cardViewModel: [CardViewModel] = {
+//        let producers = [
+//            User(name: "Kelly", age: 23, profession: "Music DJ", imageName: ["kelly1", "kelly2", "kelly3"]),
+//            User(name: "Jane", age: 18, profession: "Teacher", imageName: ["jane1", "jane2", "jane3"]),
+//            Advertiser(title: "Slide Out Menu", brandName: "Lets Build That APP", posterPhotoName: "slide_out_menu_poster")
+//        ] as [ProducesCardViewModel]
+//
+//        let viewModels = producers.map {return $0.toCardViewModel()}
+//        return viewModels
+//    }()
+    
+    var cardViewModel = [CardViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +41,16 @@ class HomeController: UIViewController {
     private func fetchUsersFromFireStore() {
         Firestore.firestore().collection("users").getDocuments { (snapshot, err) in
             if let err = err {
-                print("Faild to fetch users:", err)
+                print("Failed to fetch users:", err)
                 return
             }
             
             snapshot?.documents.forEach({ (documentSnapShot) in
-                documentSnapShot.data()
+                let userDictionary = documentSnapShot.data()
+                let user = User(dictionary: userDictionary)
+                self.cardViewModel.append(user.toCardViewModel())
             })
+            self.setupDummyCards()
         }
     }
     
