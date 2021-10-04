@@ -12,7 +12,7 @@ struct User: ProducesCardViewModel {
     let name: String
     let age: Int
     let profession: String
-    let imageName: [String]
+    let imageURL1: String
     
     init(dictionary: [String: Any]) {
         // we'll initialize our user here
@@ -21,8 +21,8 @@ struct User: ProducesCardViewModel {
         self.age = 0
         self.profession = "Jobless"
         
-        let imageURL1 = dictionary["imageURL"] as? String ?? ""
-        self.imageName = [imageURL1]
+        self.imageURL1 = dictionary["imageURL1"] as? String ?? ""
+//        self.imageName = [imageURL1]
     }
     
     func toCardViewModel() -> CardViewModel {
@@ -31,7 +31,7 @@ struct User: ProducesCardViewModel {
         attributedText.append(NSAttributedString(string: "  \(age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
         attributedText.append(NSAttributedString(string: "\n\(profession)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
         
-        return CardViewModel(imageNames: imageName, attributedString: attributedText, textAlignment: .left)
+        return CardViewModel(imageNames: [imageURL1], attributedString: attributedText, textAlignment: .left)
     }
 }
 
