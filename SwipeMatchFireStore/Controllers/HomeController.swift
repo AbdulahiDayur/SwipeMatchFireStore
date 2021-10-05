@@ -14,18 +14,6 @@ class HomeController: UIViewController {
     let cardsDeckView = UIView()
     let buttonsStackView = HomeBottomControlsStackView()
     
-    
-//    let cardViewModel: [CardViewModel] = {
-//        let producers = [
-//            User(name: "Kelly", age: 23, profession: "Music DJ", imageName: ["kelly1", "kelly2", "kelly3"]),
-//            User(name: "Jane", age: 18, profession: "Teacher", imageName: ["jane1", "jane2", "jane3"]),
-//            Advertiser(title: "Slide Out Menu", brandName: "Lets Build That APP", posterPhotoName: "slide_out_menu_poster")
-//        ] as [ProducesCardViewModel]
-//
-//        let viewModels = producers.map {return $0.toCardViewModel()}
-//        return viewModels
-//    }()
-    
     var cardViewModel = [CardViewModel]()
     
     override func viewDidLoad() {
@@ -34,7 +22,7 @@ class HomeController: UIViewController {
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         
         setupLayout()
-        setupDummyCards()
+        setupFirestoreUserCards()
         fetchUsersFromFireStore()
     }
     
@@ -50,7 +38,7 @@ class HomeController: UIViewController {
                 let user = User(dictionary: userDictionary)
                 self.cardViewModel.append(user.toCardViewModel())
             })
-            self.setupDummyCards()
+            self.setupFirestoreUserCards()
         }
     }
     
@@ -61,15 +49,12 @@ class HomeController: UIViewController {
         present(registrationController, animated: true)
     }
     
-    private func setupDummyCards() {
+    private func setupFirestoreUserCards() {
         
         cardViewModel.forEach { (cardVM) in
             let cardView = CardView(frame: .zero)
-//            cardView.imageView.image = UIImage(named: cardVM.imageName)
-//            cardView.informationLabel.attributedText = cardVM.attributedString
-//            cardView.informationLabel.textAlignment = cardVM.textAlignment
             cardView.cardViewModel = cardVM
-            
+        //  cardView.imageView.image = UIImage(named: cardVM.imageName)
             cardsDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }
