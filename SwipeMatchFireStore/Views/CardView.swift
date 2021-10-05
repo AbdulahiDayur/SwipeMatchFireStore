@@ -15,6 +15,7 @@ class CardView: UIView {
         didSet {
             let imageName = cardViewModel.imageNames.first ?? ""
             
+            // load our image using some kind of url instead
             if let url = URL(string: imageName){
                 imageView.sd_setImage(with: url)
             }
