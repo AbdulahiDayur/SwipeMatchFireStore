@@ -9,29 +9,33 @@ import UIKit
 
 struct User: ProducesCardViewModel {
     // Defining our properties for our model layer
-    let name: String
-    let age: Int
-    let profession: String
-    let imageURL1: String
+    var name: String?
+    var age: Int?
+    var profession: String?
+    var imageURL1: String?
+    var uid: String?
     
     init(dictionary: [String: Any]) {
         // we'll initialize our user here
-        let name = dictionary["fullName"] as? String ?? ""
-        self.name = name
-        self.age = 0
-        self.profession = "Jobless"
+        self.age = dictionary["age"] as? Int
+        self.profession = dictionary["profession"] as? String
         
+        self.name = dictionary["fullName"] as? String ?? ""
         self.imageURL1 = dictionary["imageURL1"] as? String ?? ""
-//        self.imageName = [imageURL1]
+        self.uid = dictionary["uid"] as? String ?? ""
     }
     
     func toCardViewModel() -> CardViewModel {
         
-        let attributedText = NSMutableAttributedString(string: name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
-        attributedText.append(NSAttributedString(string: "  \(age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
-        attributedText.append(NSAttributedString(string: "\n\(profession)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
+        let attributedText = NSMutableAttributedString(string: name ?? "", attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
         
-        return CardViewModel(imageNames: [imageURL1], attributedString: attributedText, textAlignment: .left)
+        let ageString = age != nil ? "\(age!)" : "N\\A"
+        attributedText.append(NSAttributedString(string: "  \(ageString)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
+        
+        let professionString = profession != nil ? profession! : "Not available"
+        attributedText.append(NSAttributedString(string: "\n\(professionString)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
+        
+        return CardViewModel(imageNames: [imageURL1 ?? ""], attributedString: attributedText, textAlignment: .left)
     }
 }
 
