@@ -27,7 +27,10 @@ class HomeController: UIViewController {
     }
     
     private func fetchUsersFromFireStore() {
-        Firestore.firestore().collection("users").getDocuments { (snapshot, err) in
+//        let query = Firestore.firestore().collection("users")
+        let query = Firestore.firestore().collection("users").whereField("friends", arrayContains: "Chris")
+            
+        query.getDocuments { (snapshot, err) in
             if let err = err {
                 print("Failed to fetch users:", err)
                 return
