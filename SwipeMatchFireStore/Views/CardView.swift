@@ -36,7 +36,6 @@ class CardView: UIView {
     
     func setupImageIndexObserver() {
         cardViewModel.imageIndexObserver = { [weak self] (idx, imageUrl) in
-            print("changing photo from view model")
             guard let self = self else {return}
             
             if let url = URL(string: imageUrl ?? "") {
@@ -77,19 +76,6 @@ class CardView: UIView {
         } else {
             cardViewModel.goToPreviousPhoto()
         }
-//        if shouldAdvanceNextPhoto {
-//            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
-//        } else {
-//            imageIndex = max(0, imageIndex - 1)
-//        }
-//
-//
-//        let imageName = cardViewModel.imageNames[imageIndex]
-//        imageView.image = UIImage(named: imageName)
-//        barStackView.subviews.forEach { (view) in
-//            view.backgroundColor = barDeselectedColor
-//        }
-//        barStackView.arrangedSubviews[imageIndex].backgroundColor = .white
     }
     
     
