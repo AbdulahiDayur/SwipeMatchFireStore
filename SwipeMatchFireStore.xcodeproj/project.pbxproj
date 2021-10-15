@@ -20,6 +20,7 @@
 		0F1402C026E4321700D0EBE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1402BF26E4321700D0EBE8 /* User.swift */; };
 		0F5174AE27010EEE003A401C /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5174AD27010EEE003A401C /* Bindable.swift */; };
 		0F701D8626F02084003DAB7F /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F701D8526F02084003DAB7F /* Advertiser.swift */; };
+		0F99CAD22717EBC4002DBEDF /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F99CAD12717EBC4002DBEDF /* SettingsController.swift */; };
 		0FA7DC5626F68D750091D30E /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7DC5526F68D750091D30E /* RegistrationController.swift */; };
 		0FA7DC5926F8F7FC0091D30E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7DC5826F8F7FC0091D30E /* CustomTextField.swift */; };
 		0FBD549126E7EE570073A64B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBD549026E7EE570073A64B /* HomeController.swift */; };
@@ -44,6 +45,7 @@
 		0F1402BF26E4321700D0EBE8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0F5174AD27010EEE003A401C /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		0F701D8526F02084003DAB7F /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		0F99CAD12717EBC4002DBEDF /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0FA7DC5526F68D750091D30E /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		0FA7DC5826F8F7FC0091D30E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		0FBD549026E7EE570073A64B /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				0FA7DC5526F68D750091D30E /* RegistrationController.swift */,
 				0FDF446E26FAA1FE00F3E5E2 /* RegistrationViewModel.swift */,
 				0F5174AD27010EEE003A401C /* Bindable.swift */,
+				0F99CAD12717EBC4002DBEDF /* SettingsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				0F1402AE26D45E4800D0EBE8 /* HomeBottomControlsStackView.swift in Sources */,
 				0F1402C026E4321700D0EBE8 /* User.swift in Sources */,
 				0FBD549126E7EE570073A64B /* HomeController.swift in Sources */,
+				0F99CAD22717EBC4002DBEDF /* SettingsController.swift in Sources */,
 				0FA7DC5626F68D750091D30E /* RegistrationController.swift in Sources */,
 				0F1402B526D4AAF400D0EBE8 /* TopNavigationStackView.swift in Sources */,
 				0F5174AE27010EEE003A401C /* Bindable.swift in Sources */,
