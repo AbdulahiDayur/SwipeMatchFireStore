@@ -9,9 +9,15 @@ import UIKit
 
 class SettingsController: UITableViewController {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpNavigationItems()
+    }
+    
+    private func setUpNavigationItems() {
         navigationItem.title = "Settings"
         navigationController?.navigationBar.prefersLargeTitles = true
         

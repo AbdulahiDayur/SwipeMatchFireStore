@@ -67,10 +67,9 @@ class HomeController: UIViewController {
     }
     
     @objc func handleSettings() {
-        print("Show registration page")
         let settingsController = SettingsController()
-        settingsController.modalPresentationStyle = .fullScreen
         let navController = UINavigationController(rootViewController: settingsController)
+        navController.modalPresentationStyle = .overFullScreen
         present(navController, animated: true)
     }
     
