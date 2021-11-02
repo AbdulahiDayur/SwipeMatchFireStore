@@ -147,8 +147,8 @@
 				0FBD549026E7EE570073A64B /* HomeController.swift */,
 				0FA7DC5526F68D750091D30E /* RegistrationController.swift */,
 				0FDF446E26FAA1FE00F3E5E2 /* RegistrationViewModel.swift */,
-				0F5174AD27010EEE003A401C /* Bindable.swift */,
 				0F99CAD12717EBC4002DBEDF /* SettingsController.swift */,
+				0F5174AD27010EEE003A401C /* Bindable.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
